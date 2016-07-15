@@ -1,0 +1,29 @@
+<head>
+  <title>File Upload</title>
+  <script type="text/javascript" src="{{static_url('jquery.js')}}"></script>
+</head>
+<body>
+  <form method="POST" action="upload" enctype="multipart/form-data">
+      File:<input type="file" name="file"/>
+      <input type="submit" value="submit"/>
+  </form>
+  <div id="status"></div>
+  <script>
+         $('form').submit(function(e){
+         e.preventDefault();
+          var data = new FormData($(this)[0]);
+          $.ajax({
+              url:"/upload",
+              type:"POST",
+              data:data,
+              success:function(response){
+                  console.log(response);
+              },
+              error:function(error){
+                  console.log(error)
+               }
+         });
+      });
+
+  </script>
+</body>
